@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State private var redValue = Double.random(in: 0...255)
-    @State private var blueValue = Double.random(in: 0...255)
-    @State private var greenValue = Double.random(in: 0...255)
+    @State private var redValue = Double.random(in: 1...255)
+    @State private var blueValue = Double.random(in: 1...255)
+    @State private var greenValue = Double.random(in: 1...255)
     
     @State private var alertPresented = false
     
@@ -21,12 +21,7 @@ struct ContentView: View {
             Color(.systemTeal)
                 .ignoresSafeArea()
             VStack {
-                RGBView(height: 100, color: Color(
-                            CGColor(
-                                red: CGFloat(redValue),
-                                green: CGFloat(greenValue),
-                                blue: CGFloat(blueValue),
-                                alpha: 1)))
+                RGBView(red: redValue, green: greenValue, blue: blueValue)
                 SliderLogic(red: $redValue, blue: $blueValue, green: $greenValue)
                 Spacer()
             }
@@ -50,7 +45,7 @@ struct SliderLogic: View {
 
         HStack {
             VStack {
-                RGBTexts(red: $red, blue: $blue, green: $green)
+                RGBText(red: $red, blue: $blue, green: $green)
                     .padding(.horizontal)
                     .frame(width: 65)
             }
@@ -58,7 +53,7 @@ struct SliderLogic: View {
                 Sliders(red: $red, blue: $blue, green: $green)
             }
             VStack {
-                RGBTextfields(red: $red, blue: $blue, green: $green)
+                RGBTextfield(red: $red, blue: $blue, green: $green)
                     .padding(.horizontal)
                     .frame(width: 80)
             }
@@ -81,7 +76,7 @@ struct Sliders: View {
     }
 }
 
-struct RGBTexts: View {
+struct RGBText: View {
     
     @Binding var red: Double
     @Binding var blue: Double
@@ -96,7 +91,7 @@ struct RGBTexts: View {
     }
 }
 
-struct RGBTextfields: View {
+struct RGBTextfield: View {
     
     @Binding var red: Double
     @Binding var blue: Double

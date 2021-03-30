@@ -10,13 +10,23 @@ import SwiftUI
 struct RGBView: View {
     
     let width: CGFloat = UIScreen.main.bounds.width - 20
-    let height: CGFloat 
-    let color: Color
+    let height: CGFloat = 100
+    var red: Double
+    var green: Double
+    var blue: Double
     
     var body: some View {
         Rectangle()
             .frame(width: width, height: height)
-            .foregroundColor(color)
+            .foregroundColor(
+                Color(
+                    CGColor(
+                        red: CGFloat(red/255),
+                        green: CGFloat(green/255),
+                        blue: CGFloat(blue/255),
+                        alpha: 1)
+                )
+            )
             .cornerRadius(20)
             .overlay(RoundedRectangle(cornerRadius: 20, style: .continuous)
                         .stroke(Color.white,
@@ -27,6 +37,6 @@ struct RGBView: View {
 
 struct RGBView_Previews: PreviewProvider {
     static var previews: some View {
-        RGBView(height: 100, color: .green)
+        RGBView(red: 50, green: 50, blue: 150)
     }
 }
